@@ -6,19 +6,19 @@
     <title>My Profile</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.6;
         }
-        
-        /* Section 1 - Menu */
+
+        /* Menu */
         nav {
-            background-color: #333;
+            background-color: #a04eff;
             color: white;
             padding: 1rem;
         }
-        
+
         nav ul {
             list-style-type: none;
             margin: 0;
@@ -26,12 +26,46 @@
             display: flex;
             justify-content: space-around;
         }
-        
+
         nav ul li a {
             color: white;
             text-decoration: none;
+            padding: 1rem;
+            display: inline-block;
+            position: relative;
+            transition: transform 0.3s ease, color 0.3s ease;
         }
-        
+
+        nav ul li a:hover {
+            color: #f4f4f4;
+            transform: scale(1.1);
+        }
+
+        nav ul li a.bubble {
+            background-color: white;
+            color: #a04eff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        nav ul li a:hover .bubble {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* Section 2 - Judul dan Gambar */
         .header {
             display: flex;
@@ -40,62 +74,62 @@
             padding: 2rem;
             background-color: #f4f4f4;
         }
-        
+
         .header-text {
             width: 60%;
         }
-        
+
         .header-image {
             width: 35%;
         }
-        
+
         .header-image img {
             width: 100%;
             height: auto;
         }
-        
+
         /* Section 3 - Biodata */
         .biodata {
             padding: 2rem;
         }
-        
+
         .biodata-boxes {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
             margin-top: 1rem;
         }
-        
+
         .box {
             border: 1px solid #ddd;
             padding: 1rem;
             border-radius: 5px;
             background-color: #f9f9f9;
         }
-        
-        /* Section 4 - Portofolio */
+
+        /* Section 4 - Portfolio */
         .portfolio {
             padding: 2rem;
             background-color: #f4f4f4;
         }
-        
+
         .portfolio-items {
             display: flex;
             justify-content: space-between;
             margin-top: 1rem;
         }
-        
+
         .portfolio-item {
             width: 30%;
             text-align: center;
         }
-        
+
         .portfolio-item img {
             width: 100%;
             height: auto;
             border: 1px solid #ddd;
         }
-        
+
         /* Footer */
         footer {
             background-color: #333;
@@ -104,17 +138,17 @@
             padding: 1rem;
             margin-top: 1rem;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 1rem 0;
         }
-        
+
         table, th, td {
             border: 1px solid #ddd;
         }
-        
+
         th, td {
             padding: 0.5rem;
             text-align: left;
@@ -132,7 +166,7 @@
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
-    
+
     <!-- Section 2 - Judul di kiri dan gambar di kanan -->
     <section class="header" id="home">
         <div class="header-text">
@@ -140,15 +174,15 @@
             <p>Hi there! I'm an export and import enthusiast, driven by the excitement of global trade and the endless possibilities it brings.</p>
         </div>
         <div class="header-image">
-            <img src="" alt="Profile Image">
+            <img src="images/Andini Foto.png" alt="Profile Image">
         </div>
     </section>
-    
-    <!-- Section 3 - Biodata dengan 6 box -->
-    <section class="biodata" id="about">
+
+    <!-- Section 3 - Biodata -->
+    <section class="biodata" id="biodata">
         <h2>About Me</h2>
-        <p>Apartenibuone and word</p>
-        
+        <p>Andini adalah seorang anak kedua dari tiga bersaudara. Saat ini, dia sedang menempuh bangku perkuliahan semester 4. Kesibukannya adalah menjadi asisten dosen untuk mata kuliah Kepabeanan bagi adik kelasnya semester 2.</p>
+
         <div class="biodata-boxes">
             <div class="box">
                 <h3>Personal Info</h3>
@@ -182,7 +216,7 @@
                 <p>Learn new technologies</p>
             </div>
         </div>
-        
+
         <!-- HTML Table -->
         <table>
             <tr>
@@ -197,8 +231,8 @@
             </tr>
         </table>
     </section>
-    
-    <!-- Section 4 - Portofolio -->
+
+    <!-- Section 4 - Portfolio -->
     <section class="portfolio" id="portfolio">
         <h2>Portfolio</h2>
         <div class="portfolio-items">
@@ -219,7 +253,7 @@
             </div>
         </div>
     </section>
-    
+
     <!-- Footer -->
     <footer id="contact">
         <h3>Contact Information</h3>
@@ -228,5 +262,24 @@
         <p>Email: info@scientist.com</p>
         <p>Phone: 4000-000-0001</p>
     </footer>
+
+    <script>
+        const navLinks = document.querySelectorAll('nav ul li a');
+
+        window.addEventListener("scroll", () => {
+            navLinks.forEach(link => {
+                const targetId = link.getAttribute("href").substring(1); // Fix selector
+                const section = document.getElementById(targetId);
+                const rect = section.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight / 2 && rect.bottom > window.innerHeight / 3;
+
+                if (isVisible) {
+                    link.classList.add("bubble");
+                } else {
+                    link.classList.remove("bubble");
+                }
+            });
+        });
+    </script>
 </body>
 </html>
